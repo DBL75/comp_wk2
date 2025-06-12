@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int M = 1000000007;
+int main()
+{
+    int n, m, k;
+    cin >> n >> m >> k;
+    queue<long long> q;
+    q.push(n);
+    q.push(m);
+    int cnt = 2;
+    if(k==1){
+        cout << n;
+        return 0;    
+    }
+    if(k==2){
+        cout << m;
+        return 0;    
+    }
+    while(1){
+        long long x = q.front();
+        q.push(n*x%M);
+        q.push(m*x%M);
+        cnt += 2;
+        if(cnt == k){
+            cout << m*x%M;
+            return 0;
+        }
+        else if(cnt == k+1){
+            cout << n*x%M;
+            return 0;
+        }
+        q.pop();
+    }
+}
