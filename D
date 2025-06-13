@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+using namespace std;
+int tim[1000001];
+int main()
+{
+    int n, m;
+    cin >> n >> m;
+    queue<int> q;
+    for(int i=1; i<=m; i++){
+        int x;
+        cin >> x;
+        tim[x] = 1;
+        q.push(x);
+    }
+    int t = 2;
+    while(!q.empty()){
+        int s = q.size();
+        for(int i=1; i<=s; i++){
+            int x = q.front();
+            q.pop();
+            if(!tim[x-1] && x-1 >= 1){
+                q.push(x-1);
+                tim[x-1] = t;
+            }
+            if(!tim[x+1] && x+1 <= n){
+                q.push(x+1);
+                tim[x+1] = t;
+            }
+        }
+        t++;
+    }
+    for(int i=1; i<=n; i++){
+        cout << tim[i] << " ";
+    }
+}
