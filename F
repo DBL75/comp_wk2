@@ -1,0 +1,15 @@
+#include<bits/stdc++.h>
+using namespace std;
+int n;
+string s;
+void f(int i){
+    if(i > n) return;
+    f(2*i);
+    cout << s[i-1] << " ";
+    f(2*i+1);
+}
+int main()
+{
+    cin >> n >> s;
+    f(1);
+}
