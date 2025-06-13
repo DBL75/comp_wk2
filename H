@@ -1,0 +1,30 @@
+//다시 풀어보기...디버깅 어려움
+#include<bits/stdc++.h>
+using namespace std;
+int n, v;
+int arr[101][101];
+int vis[101];
+stack<int> st;
+int main()
+{
+    cin >> n >> v;
+    for(int i=1; i<=v; i++){
+        int x, y;
+        cin >> x >> y;
+        arr[x][y] = 1;
+        arr[y][x] = 1;
+    }
+    st.push(1);
+    while(!st.empty()){
+        int x = st.top();
+        st.pop();
+        if(vis[x]) continue;
+        cout << x << " ";
+        vis[x] = 1;
+        for(int i=n; i>=1; i--){ //역순 탐색 조심
+            if(!vis[i] && arr[x][i] == 1){
+                st.push(i);
+            }
+        }
+    }
+}
