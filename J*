@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n, m, k;
+    cin >> n >> m >> k;
+    queue<int> q;
+    q.push(0);
+    int x;
+    while(!q.empty())
+    {
+        x = q.front();
+        q.pop();
+        if(n > 0){
+            q.push(x+1);
+            q.push(x+1);
+            n--;
+        }
+        else if(m > 0){
+            q.push(x+1);
+            m--;
+        }
+        else k--;
+    }
+    if(k) cout << "impossible.";
+    else cout << x;
+}
