@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+int n, v;
+vector<pair<int, int>> arr;
+int vis[2001];
+queue<int> q;
+int main()
+{
+    cin >> n >> v;
+    for(int i=1; i<=v; i++){
+        int x, y;
+        cin >> x >> y;
+        arr.push_back({x, y});
+    }
+    q.push(1);
+    vis[1] =1 ;
+    while(!q.empty()){
+        int x = q.front();
+        cout << x << " ";
+        q.pop();
+        for(int i=0; i<v; i++){
+            if(!vis[arr[i].second] && arr[i].first == x){
+                q.push(arr[i].second);
+                vis[arr[i].second] = 1;
+            }
+            if(!vis[arr[i].first] && arr[i].second == x){
+                q.push(arr[i].first);
+                vis[arr[i].first] = 1;
+            }
+        }
+    }
+}
