@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+using namespace std;
+int n, v;
+int arr[101][101];
+int vis[101];
+queue<int> q;
+int main()
+{
+    cin >> n >> v;
+    for(int i=1; i<=v; i++){
+        int x, y;
+        cin >> x >> y;
+        arr[x][y] = 1;
+        arr[y][x] = 1;
+    }
+    q.push(1);
+    vis[1] =1 ;
+    while(!q.empty()){
+        int x = q.front();
+        cout << x << " ";
+        q.pop();
+        for(int i=1; i<=n; i++){
+            if(!vis[i] && arr[i][x] == 1){
+                q.push(i);
+                vis[i] = 1;
+            }
+        }
+    }
+}
