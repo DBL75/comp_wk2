@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+using namespace std;
+vector<string> m;
+int h, w;
+int vis[4001][4001];
+queue<pair<int,int>> q;
+int main()
+{
+    cin >> h >> w;
+    m.resize(h);
+    for(int i=0; i<h; i++){
+        cin >> m[i];
+    }
+    int chk = 0;
+    int cnt = 0;
+    for(int i=0; i<h; i++){
+        for(int j=0; j<w; j++){
+            if(m[i][j] == 'S'){
+                q.push({i, j});
+                vis[i][j] = 1;
+                chk = 1;
+                break;
+            }
+        }
+        if(chk) break;
+    }
+    int dx[4] = {-1,1,0,0};
+    int dy[4] = {0,0,-1,1};
+    while(!q.empty()){
+        cnt++;
+        int si = q.size();
+        for(int i=0; i<si; i++){
+            int x = q.front().first;
+            int y = q.front().second;
+            q.pop();
+            for(int j=0; j<4; j++){
+                int nx = x + dx[j];
+                int ny = y + dy[j];
+                if(nx>=0 && nx<h && ny>=0 && ny<w && !vis[nx][ny]){
+                    if(m[nx][ny] == '.'){
+                        q.push({nx, ny});
+                        vis[nx][ny] = 1;
+                    }
+                    else if(m[nx][ny] == 'G'){
+                        cout << cnt;
+                        return 0;
+                    }
+                }
+            }
+        }
+    }
+}
