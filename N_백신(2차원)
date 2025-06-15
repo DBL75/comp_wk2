@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+using namespace std;
+int n, m, k, x, y;
+int arr[1001][1001];
+queue<pair<int, int>>q;
+int main()
+{
+    cin >> n >> m >> k;
+    for(int i=1; i<=k; i++){
+        cin >> x >> y;
+        arr[x][y] = 1;
+        q.push({x, y});
+    }
+    int dx[4] = {-1, 1, 0, 0};
+    int dy[4] = {0, 0, -1, 1};
+    int t=2;
+    while(!q.empty()){
+        int j = q.size();
+        for(int i=1; i<=j; i++){
+             x = q.front().first;
+             y = q.front().second;
+             q.pop();
+             for(int a=0; a<4; a++){
+                if(x+dx[a] >= 1 && x+dx[a] <= n && y+dy[a] >=1 && y+dy[a] <= m && !arr[x+dx[a]][y+dy[a]]){
+                    q.push({x+dx[a], y+dy[a]});
+                    arr[x+dx[a]][y+dy[a]] = t;
+                }
+             }
+        }
+        t++;
+    }
+    for(int i=1; i<=n; i++){
+        for(int j=1; j<=m; j++){
+            cout << arr[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
