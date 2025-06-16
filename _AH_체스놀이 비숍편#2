@@ -1,0 +1,62 @@
+#include<bits/stdc++.h>
+using namespace std;
+bool same(pair<int,int>a, pair<int,int>b){
+    int x1 = a.first; int y1 = a.second;
+    int x2 = b.first; int y2 = b.second;
+    if(x1+y1 == x2+y2) return true;
+    else if(x1-y1 ==x2-y2) return true;
+    else return false;
+}
+int g(pair<int,int> a, pair<int,int> b){
+    if(same(a, b)) return 1;
+    else return 2;
+}
+int f(pair<int,int> st, pair<int,int> a, pair<int,int> b, pair<int,int> c){
+    return g(st, a) + g(a, b) + g(b, c);
+}
+int test;
+vector<string> ch(8);
+pair<int,int> t[3];
+pair<int,int> b;
+int main()
+{
+    cin >> test;
+    for(int i=0; i<test; i++){
+        for(int j=0; j<8; j++){
+            cin >> ch[j];
+        }
+        int cnt = 0;
+        for(int j=0; j<8; j++){
+            for(int k=0; k<8; k++){
+                if(ch[j][k] == 'B') b={j, k};
+                else if(ch[j][k] == 'T'){
+                    t[cnt] = {j, k};
+                    cnt++;
+                }
+            }
+        }
+        bool chk = false;
+        for(int j=0; j<3; j++){
+            if((t[j].first + t[j].second)%2 != (b.first+b.second)%2){
+                chk = true;
+                break;
+            }
+        }
+        if(chk){
+            cout << "-1" << endl;
+            continue;
+        }
+        int arr[6];
+        int mini = INT_MAX;
+        arr[0] = f(b,t[0],t[1],t[2]);
+        arr[1] = f(b,t[0],t[2],t[1]);
+        arr[2] = f(b,t[1],t[0],t[2]);
+        arr[3] = f(b,t[1],t[2],t[0]);
+        arr[4] = f(b,t[2],t[0],t[1]);
+        arr[5] = f(b,t[2],t[1],t[0]);
+        for(int j=0; j<6; j++){
+            if(mini > arr[j]) mini = arr[j];
+        }
+        cout << mini << endl;
+    }
+}
