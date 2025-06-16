@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+using namespace std;
+int h,n;
+void f(int x,int y,int z) // 노드의 번호, 중위순회 상의 위치, 남은 높이
+{
+    if (n>y){
+        f(2*x+1,y+pow(2,z-1),z-1);
+    }
+    else if (n<y){
+        f(2*x,y-pow(2,z-1),z-1);
+    }
+    else{
+        cout<<x;
+        return;
+    }
+}
+int main()
+{
+    cin>>h>>n;
+    f(1,int(pow(2,h)),h);
+}
