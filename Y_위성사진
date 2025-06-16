@@ -38,4 +38,4 @@ int main()
         }
     }
     cout<<ans;
-} // PROB Y 위성 사진 
+} 
